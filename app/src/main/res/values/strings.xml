@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PhotoPicker</string>
+    <string name="capture">Capture</string>
+    <string name="alternar_camara">Alternar camara</string>
+    <string name="resolucion_alta">Resolucion alta</string>
+    <string name="resoluci_n_baja">Resolución baja</string>
+    <string name="resolucion_media">Resolucion media</string>
+    <string name="cambiar_resolucion">Cambiar resolucion</string>
+</resources>
