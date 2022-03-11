@@ -30,7 +30,9 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivity extends AppCompatActivity implements
         BottomSheetOptions.OnSheetOptionListener,
-        BottomSheetCamera.OnSheetCaptureListener, ImageAdapter.OnResourceClickListener {
+        BottomSheetCamera.OnSheetCaptureListener, ImageAdapter.OnResourceClickListener,
+        BottomSheetQr.OnQRScanned
+{
     private final String TAG = this.getClass().getSimpleName();
 
     private ArrayList<Uri> resources;
@@ -72,13 +74,17 @@ public class MainActivity extends AppCompatActivity implements
             }
     );
 
-    private void checkWritePermission() {
+    private void checkWritePermission(Boolean forQR) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(
                     ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                             == PackageManager.PERMISSION_GRANTED
             ) {
-                openCamera();
+                if (forQR) {
+                    openScanner();
+                } else {
+                    openCamera();
+                }
             } else {
                 requestWriteLauncher.launch(
                         new String[]{
@@ -87,8 +93,17 @@ public class MainActivity extends AppCompatActivity implements
                 );
             }
         } else {
-            openCamera();
+            if (forQR) {
+                openScanner();
+            } else {
+                openCamera();
+            }
         }
+    }
+
+    private void openScanner() {
+        BottomSheetQr sheetQr = new BottomSheetQr();
+        sheetQr.show(getSupportFragmentManager(), "QR");
     }
 
     private void openCamera() {
@@ -99,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void takePhoto() {
         Toast.makeText(this, "Take Photo", Toast.LENGTH_SHORT).show();
-        checkWritePermission();
+        checkWritePermission(false);
     }
 
     // Pick image
@@ -152,6 +167,12 @@ public class MainActivity extends AppCompatActivity implements
         checkReadPermission();
     }
 
+    @Override
+    public void scanQR() {
+        Toast.makeText(this, "Scan QR", Toast.LENGTH_SHORT).show();
+        checkWritePermission(true);
+    }
+
     @SuppressLint("RestrictedApi")
     private void setPreview(Uri fileUri) {
         //Only to check if image is rotated
@@ -184,5 +205,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onResourceClick(Uri resourceUri) {
         setPreview(resourceUri);
+    }
+
+    @Override
+    public void onQRScanned(String qr) {
+        binding.tvQr.setText(qr);
     }
 }

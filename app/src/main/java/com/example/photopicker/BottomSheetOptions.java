@@ -21,6 +21,7 @@ public class BottomSheetOptions extends BottomSheetDialogFragment{
     interface OnSheetOptionListener {
         void pickImageFromGallery();
         void takePhoto();
+        void scanQR();
     }
 
     @Override
@@ -55,6 +56,10 @@ public class BottomSheetOptions extends BottomSheetDialogFragment{
             mListener.takePhoto();
             dismiss();
         }));
+        binding.btnQrScan.setOnClickListener(v -> {
+            mListener.scanQR();
+            dismiss();
+        });
         return binding.getRoot();
     }
 }

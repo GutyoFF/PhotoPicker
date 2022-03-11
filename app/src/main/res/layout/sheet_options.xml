@@ -27,6 +27,13 @@
                 app:icon="@drawable/ic_baseline_image_24"
                 app:iconGravity="textStart"
                 />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_qr_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Codigo QR"
+                app:icon="@drawable/ic_baseline_qr_code_scanner_24"
+                app:iconGravity="textStart"/>
         </LinearLayout>
     </FrameLayout>
 </layout>

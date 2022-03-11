@@ -52,6 +52,7 @@ dependencies {
 
     implementation 'androidx.camera:camera-view:1.0.0-alpha32'
 
+    implementation 'com.google.zxing:core:3.3.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
