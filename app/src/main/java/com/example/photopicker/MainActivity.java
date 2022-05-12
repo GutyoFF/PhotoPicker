@@ -130,17 +130,13 @@ public class MainActivity extends AppCompatActivity implements
     );
 
     private void checkReadPermission(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat
-                    .checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                pickImage();
-            } else {
-                requestReadLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
-            }
-        } else {
+        if(ContextCompat
+                .checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+        ) {
             pickImage();
+        } else {
+            requestReadLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
     }
 
