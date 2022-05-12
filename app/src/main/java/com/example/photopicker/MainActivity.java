@@ -75,29 +75,21 @@ public class MainActivity extends AppCompatActivity implements
     );
 
     private void checkWritePermission(Boolean forQR) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                            == PackageManager.PERMISSION_GRANTED
-            ) {
-                if (forQR) {
-                    openScanner();
-                } else {
-                    openCamera();
-                }
-            } else {
-                requestWriteLauncher.launch(
-                        new String[]{
-                                Manifest.permission.CAMERA
-                        }
-                );
-            }
-        } else {
+        if(
+                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED
+        ) {
             if (forQR) {
                 openScanner();
             } else {
                 openCamera();
             }
+        } else {
+            requestWriteLauncher.launch(
+                    new String[]{
+                            Manifest.permission.CAMERA
+                    }
+            );
         }
     }
 
