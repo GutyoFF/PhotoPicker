@@ -14,12 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
             <androidx.camera.view.PreviewView
                 android:id="@+id/pv_camera"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:scaleType="fillCenter"
-                />
+                app:scaleType="fillCenter" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
